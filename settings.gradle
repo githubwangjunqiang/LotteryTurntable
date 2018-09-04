@@ -1,0 +1,1 @@
+include ':app', ':lotteryturntable2', ':lottery'
