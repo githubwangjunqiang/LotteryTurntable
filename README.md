@@ -34,10 +34,10 @@ Android -小强-本人竭力打造的第一个开源项目 欢迎star 请勿商�
         	android:layout_height="wrap_content">
 
         	<com.xiaoqiang.lottery.lottery.luckView
-            		android:id="@+id/luckview"
-            		android:layout_width="200dp"
-            		android:layout_height="200dp"
-            		android:layout_gravity="center"
+            	android:id="@+id/luckview"
+            	android:layout_width="200dp"
+            	android:layout_height="200dp"
+            	android:layout_gravity="center"
 		    	app:lv_bordercolor="@color/colorAccent"
 		    	app:lv_isUnColor="true"
 		    	app:lv_isUnSize="true"
@@ -47,11 +47,11 @@ Android -小强-本人竭力打造的第一个开源项目 欢迎star 请勿商�
 		<!--中间指针 图片自己随意-->
 		
         	<ImageView
-            		android:onClick="doClicl"
-            		android:layout_width="wrap_content"
-            		android:layout_height="wrap_content"
-            		android:layout_gravity="center"
-            		android:src="@mipmap/ic_launcher" />
+            	android:onClick="doClicl"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:layout_gravity="center"
+            	android:src="@mipmap/ic_launcher" />
     </FrameLayout>
 		
 
@@ -115,6 +115,10 @@ Android -小强-本人竭力打造的第一个开源项目 欢迎star 请勿商�
 
  
  就是这么简单 完成了 抽奖转盘 有什么问题可以提交 我会及时修改bug
+ 
+ 注意事项
+ 
+ 	 本库使用SurfaceView 来实现转盘绘制 如有其他冲突 请您酌情考虑
      	
 
 		
