@@ -25,3 +25,99 @@ Android -小强-本人竭力打造的第一个开源项目 欢迎star 请勿商�
           //CODE 修改为最新版本号 即可
 	        implementation 'com.github.githubwangjunqiang:LotteryTurntable:vCODE'
 	}
+	
+	
+3 布局中使用
+
+ 	<FrameLayout
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content">
+
+        	<com.xiaoqiang.lottery.lottery.luckView
+            		android:id="@+id/luckview"
+            		android:layout_width="200dp"
+            		android:layout_height="200dp"
+            		android:layout_gravity="center"
+		    	app:lv_bordercolor="@color/colorAccent"
+		    	app:lv_isUnColor="true"
+		    	app:lv_isUnSize="true"
+		    	app:lv_luckDataColor="@color/colorAccent"
+		    	app:lv_rotationSpeed="50" />
+			
+		<!--中间指针 图片自己随意-->
+		
+        	<ImageView
+            		android:onClick="doClicl"
+            		android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:layout_gravity="center"
+            		android:src="@mipmap/ic_launcher" />
+    </FrameLayout>
+		
+
+4 属性作用
+
+		app:lv_bordercolor -》是指外边框颜色 默认外边框宽度是getPaddingLeft（） 如果没有设置 会有默认的宽度 如果不想有边框设置白色即可
+		
+		app:lv_isUnColor="true" -》中奖结果 是否高亮显示
+		
+		app:lv_isUnSize="true"  -》中奖结果 是否大小突出改变
+		
+		app:lv_luckDataColor  -》中奖结果 可以高亮显示的话 设置高亮的颜色 
+		
+		app:lv_rotationSpeed="50" -》 设置旋转的速度
+		
+		
+5 代码示例 
+
+    第一步  初始化
+	  //初始化 转盘
+        IluckView view = findViewById(R.id.luckview);
+        //给转盘填充奖品模块 实体类 LuckData
+        for (int i = 0; i < 6; i++) {
+            //创建奖品实体类 本库依赖此实体类
+            LuckData data = new LuckData();
+            //设置奖品背景色
+            data.setBackColor(R.color.colorAccent);
+            //设置奖品图片 可以不用填
+            data.setBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
+            //设置奖品名字
+            data.setName("我是奖品");
+            //设置奖品文字颜色
+            data.setTextColor(R.color.colorAccent);
+            //设置奖品文字大小 单位px
+            data.setTextSize(12);
+            //设置奖品唯一id 用来制定奖品位置
+            data.setId(4);
+	    //填入奖品
+            view.addLuckData(data);
+        }
+	
+     第二步  开始旋转
+     
+     	// 让转盘转起来
+        view.startLuck();
+	
+     第三步  设置停止旋转 并指定奖品结果
+     
+     	 //设置停止 传入奖品结果 参数是您指定的奖品 就是您传入的奖品任意一个
+        view.stopLuck(mLuckData.get(0));
+	
+	
+	
+6 各种配置
+ 
+ 	//可动态配置各参数
+ 		view.setBorderColor(R.color.colorAccent);
+        	view.setLuckDataColor(R.color.colorAccent);
+        	view.setLuckisUnColor(true);
+        	view.setLuckisUnSize(true);
+
+ 
+ 就是这么简单 完成了 抽奖转盘 有什么问题可以提交 我会及时修改bug
+     	
+
+		
+		
+		
+		
