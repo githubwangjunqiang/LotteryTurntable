@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
             //填入奖品
             view.addLuckData(data);
         }
+
+
         /**
          * 也可以单独添加回调
          */
