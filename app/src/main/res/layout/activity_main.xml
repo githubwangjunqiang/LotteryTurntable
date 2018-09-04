@@ -20,7 +20,7 @@
             app:lv_isUnSize="true"
             app:lv_luckDataColor="@color/colorAccent"
             app:lv_rotationSpeed="50"
-            app:lv_viewbackcolor="@color/colorAccent"/>
+            app:lv_viewbackcolor="#ffffff"/>
 
         <!--中间指针 图片自己随意-->
 

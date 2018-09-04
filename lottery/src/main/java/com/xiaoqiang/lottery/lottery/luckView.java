@@ -21,6 +21,10 @@ import java.util.List;
  */
 public class luckView extends SurfaceView implements SurfaceHolder.Callback, Runnable, IluckView {
     /**
+     * 图片的百分比 相对于半径
+     */
+    private float PAGESTIZE;
+    /**
      * 控件默认大小
      */
     private int SIZE = 100;
@@ -117,6 +121,7 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
         setFocusable(true);
         setKeepScreenOn(true);
         getAttr(attrs);
+        PAGESTIZE = 4;
         mSurfaceHolder = getHolder();
         mSurfaceHolder.addCallback(this);
         mPaint = new Paint();
@@ -273,7 +278,10 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
             //绘制图片
             Bitmap bitmap = luckData.getBitmap();
             if (bitmap != null) {
-                int imgWidth = (int) (mRanius / 4);
+                int imgWidth = (int) (mRanius / PAGESTIZE);
+                if (luckData.getBitmepWidth() > 0) {
+                    imgWidth = (int) (mRanius / luckData.getBitmepWidth());
+                }
                 float angle = (float) ((start + 360 / mLuckDatas.size() / 2) * Math.PI / 180);
                 int imgx = (int) (getWidth() / 2 + mRanius / 2 * Math.cos(angle));
                 int imgy = (int) (getWidth() / 2 + mRanius / 2 * Math.sin(angle));

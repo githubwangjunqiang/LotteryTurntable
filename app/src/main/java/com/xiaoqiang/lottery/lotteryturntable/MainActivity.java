@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
             data.setBackColor(R.color.colorAccent);
             //设置奖品图片 可以不用填
             data.setBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
+            //设置图片显示的宽度 百分比 例如控件半径的5分之一
+            data.setBitmepWidth(2);
             //设置奖品名字
             data.setName("我是奖品");
             //设置奖品文字颜色

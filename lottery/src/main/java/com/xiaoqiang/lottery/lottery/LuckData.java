@@ -11,15 +11,26 @@ public class LuckData {
     private int textSize;
     private int backColor;
     private Bitmap mBitmap;
+    private int bitmepWidth;
+
+    public int getBitmepWidth() {
+        return bitmepWidth;
+    }
+
+    public void setBitmepWidth(int bitmepWidth) {
+        this.bitmepWidth = bitmepWidth;
+    }
+
     private int id = -1;
     public LuckData() {
     }
-    public LuckData(String name, int textColor,int textSize ,int backColor, Bitmap bitmap, int id) {
+    public LuckData(String name, int textColor, int textSize, int backColor, Bitmap bitmap, int bitmepWidth, int id) {
         this.name = name;
         this.textColor = textColor;
         this.backColor = backColor;
         this.textSize = textSize;
         mBitmap = bitmap;
+        this.bitmepWidth = bitmepWidth;
         this.id = id;
     }
 
