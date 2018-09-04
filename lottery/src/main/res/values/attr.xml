@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="luckView">
+        <!--外边框颜色-->
+        <attr name="lv_bordercolor" format="color" />
+        <!--是否中奖模块大小突出-->
+        <attr name="lv_isUnSize" format="boolean" />
+        <!--是否中奖模块高亮-->
+        <attr name="lv_isUnColor" format="boolean" />
+        <!--高亮颜色-->
+        <attr name="lv_luckDataColor" format="color" />
+        <!--旋转速度 -->
+        <attr name="lv_rotationSpeed" format="integer" />
+    </declare-styleable>
+</resources>
