@@ -26,11 +26,25 @@ public interface IluckView {
     void startLuck();
 
     /**
+     * 可以重载添加速度
+     *
+     * @param mSpeed
+     */
+    void startLuck(double mSpeed);
+
+    /**
      * 停止旋转 并且传入中将结果
      *
      * @param data
      */
     void stopLuck(LuckData data);
+
+    /**
+     * 重载 添加监听
+     * @param data
+     * @param callback
+     */
+    void stopLuck(LuckData data, ICallback callback);
 
     /**
      * 是否在旋转
@@ -73,6 +87,12 @@ public interface IluckView {
      * @param color
      */
     void setViewBackColor(int color);
+
+    /**
+     * 可以单独添加 回调
+     * @param callback
+     */
+    void setLuckCallback(ICallback callback);
 
 
 }

@@ -116,6 +116,32 @@ Android -小强-本人竭力打造的第一个开源项目 欢迎star 请勿商�
      
      	 //设置停止 传入奖品结果 参数是您指定的奖品 就是您传入的奖品任意一个
         view.stopLuck(mLuckData.get(0));
+        //也可以重载 添加回调
+        view.stopLuck(data, new ICallback() {
+                 @Override
+                 public void luckStart(double mSpeed) {
+                        //TODO 旋转开始
+                 }
+
+                 @Override
+                 public void luckEnd(LuckData data) {
+                        //TODO 旋转结束 可以提示 用户得将了 实体类-》data
+                 }
+        });
+        /**
+         * 也可以单独添加回调
+         */
+         view.setLuckCallback(new ICallback() {
+                 @Override
+                 public void luckStart(double mSpeed) {
+                             //TODO 旋转开始
+                 }
+
+                 @Override
+                 public void luckEnd(LuckData data) {
+                             //TODO 旋转结束 可以提示 用户得将了 实体类-》data
+                 }
+         });
 	
 	
 	

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.xiaoqiang.lottery.lottery.ICallback;
 import com.xiaoqiang.lottery.lottery.IluckView;
 import com.xiaoqiang.lottery.lottery.LuckData;
 
@@ -39,6 +40,31 @@ public class MainActivity extends AppCompatActivity {
             //填入奖品
             view.addLuckData(data);
         }
+        /**
+         * 也可以单独添加回调
+         */
+        view.setLuckCallback(new ICallback() {
+            @Override
+            public void luckStart(double mSpeed) {
+                //TODO 旋转开始
+            }
+
+            @Override
+            public void luckEnd(LuckData data) {
+                //TODO 旋转结束 可以提示 用户得将了 实体类-》data
+            }
+        });
+//        view.stopLuck(data, new ICallback() {
+////            @Override
+////            public void luckStart(double mSpeed) {
+////                //TODO 旋转开始
+////            }
+////
+////            @Override
+////            public void luckEnd(LuckData data) {
+////                //TODO 旋转结束 可以提示 用户得将了 实体类-》data
+////            }
+////        });
     }
 
     public void doClicl(View view) {

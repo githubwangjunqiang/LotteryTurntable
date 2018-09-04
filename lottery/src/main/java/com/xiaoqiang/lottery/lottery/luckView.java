@@ -64,7 +64,7 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
     /**
      * 中将下标
      */
-    private int luckIndex = -1;
+    private LuckData mLuckData = null;
     /**
      * 中将起始角度
      */
@@ -97,6 +97,10 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
      * 背景颜色
      */
     private int mViewBackColor;
+    /**
+     * 旋转停止的监听器
+     */
+    private ICallback mICallback;
 
     public luckView(Context context) {
         this(context, null);
@@ -247,7 +251,7 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
             LuckData luckData = mLuckDatas.get(i);
             //绘制扇形
             mPaint.setColor(luckData.getBackColor());
-            if (stopIndexAngle != 0 && mSpeed == 0 && luckIndex == i) {
+            if (stopIndexAngle != 0 && mSpeed == 0 && mLuckData.getId() == luckData.getId()) {
                 if (mIsLuckUnColor) {
                     mPaint.setColor(mLuckDataColor);
                 }
@@ -302,7 +306,7 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
         if (angle >= 360) {
             angle = angle - 360;
         }
-        if (luckIndex >= 0) {
+        if (mLuckData != null) {
             mSpeed--;
             if (mSpeed == 20) {
                 if (startIndexAngle > stopIndexAngle) {
@@ -318,11 +322,8 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
                         mSpeed++;
                     }
                 }
-
             }
         }
-
-
         if (mSpeed <= 0) {
             mSpeed = 0;
             stop();
@@ -330,6 +331,18 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
     }
 
     private void stop() {
+        luckStop(mLuckData);
+    }
+
+    /**
+     * 结束 旋转
+     *
+     * @param data
+     */
+    private void luckStop(LuckData data) {
+        if (mICallback != null) {
+            mICallback.luckEnd(data);
+        }
     }
 
     @Override
@@ -348,12 +361,26 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
 
     @Override
     public void startLuck() {
-        luckIndex = -1;
-        mSpeed = mRotationSpeed;
+        startLuck(mRotationSpeed);
+    }
+
+    @Override
+    public void startLuck(double mSpeed) {
+        mLuckData = null;
+        this.mSpeed = mSpeed;
+        luckStart(mSpeed);
     }
 
     @Override
     public void stopLuck(LuckData data) {
+        stopLuck(data, null);
+    }
+
+    @Override
+    public void stopLuck(LuckData data, ICallback callback) {
+        if (callback != null) {
+            mICallback = callback;
+        }
         int index = 0;
         for (int i = 0; i < mLuckDatas.size(); i++) {
             if (mLuckDatas.get(i).getId() == data.getId()) {
@@ -381,7 +408,7 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
 //        float v2 = (float) ((-1 + Math.sqrt(1 + 8 * targetStop)) / 2) - luckangle/10;
 //        mSpeed = (v1 + Math.random() * (v2 - v1));
 //        startAngle = 0;
-        luckIndex = index;
+        mLuckData = data;
 
     }
 
@@ -413,6 +440,24 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
     @Override
     public void setViewBackColor(int color) {
         mViewBackColor = color;
+    }
+
+    @Override
+    public void setLuckCallback(ICallback callback) {
+        if (callback != null) {
+            mICallback = callback;
+        }
+    }
+
+    /**
+     * 开始 旋转
+     *
+     * @param mSpeed
+     */
+    private void luckStart(double mSpeed) {
+        if (mICallback != null) {
+            mICallback.luckStart(mSpeed);
+        }
     }
 
 
