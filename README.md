@@ -5,7 +5,7 @@ Android -小强-本人竭力打造的第一个开源项目 欢迎star 请勿商�
 
 此控件是一个 抽奖转盘 因项目中用到 开源出来 供大家娱乐 嘿嘿
 
-当前最新版本号为  1.0.2
+当前最新版本号为  1.0.3
 
 用法：
   1 添加仓库
@@ -42,7 +42,8 @@ Android -小强-本人竭力打造的第一个开源项目 欢迎star 请勿商�
 		    	app:lv_isUnColor="true"
 		    	app:lv_isUnSize="true"
 		    	app:lv_luckDataColor="@color/colorAccent"
-		    	app:lv_rotationSpeed="50" />
+		    	app:lv_rotationSpeed="50"
+		    	app:lv_viewbackcolor="@color/colorAccent"/>
 			
 		<!--中间指针 图片自己随意-->
 		
@@ -66,6 +67,8 @@ Android -小强-本人竭力打造的第一个开源项目 欢迎star 请勿商�
 		app:lv_luckDataColor  -》中奖结果 可以高亮显示的话 设置高亮的颜色 
 		
 		app:lv_rotationSpeed="50" -》 设置旋转的速度
+
+		app:lv_viewbackcolor   ->  设置背景颜色
 		
 		
 5 代码示例 
@@ -112,6 +115,7 @@ Android -小强-本人竭力打造的第一个开源项目 欢迎star 请勿商�
         	view.setLuckDataColor(R.color.colorAccent);
         	view.setLuckisUnColor(true);
         	view.setLuckisUnSize(true);
+        	view.setViewBackColor(int color);
 
  
  就是这么简单 完成了 抽奖转盘 有什么问题可以提交 我会及时修改bug

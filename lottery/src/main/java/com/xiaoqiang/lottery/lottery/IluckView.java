@@ -67,6 +67,12 @@ public interface IluckView {
      */
     void setLuckisUnSize(boolean isUnSize);
 
+    /**
+     * 设置view 的背景色 默认是白色
+     *
+     * @param color
+     */
+    void setViewBackColor(int color);
 
 
 }

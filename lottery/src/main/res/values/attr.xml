@@ -11,5 +11,7 @@
         <attr name="lv_luckDataColor" format="color" />
         <!--旋转速度 -->
         <attr name="lv_rotationSpeed" format="integer" />
+        <!--背景颜色 -->
+        <attr name="lv_viewbackcolor" format="color" />
     </declare-styleable>
 </resources>

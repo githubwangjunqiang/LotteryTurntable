@@ -2,6 +2,7 @@ package com.xiaoqiang.lottery.lottery;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -88,6 +89,10 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
      * 旋转速度
      */
     private int mRotationSpeed;
+    /**
+     * 背景颜色
+     */
+    private int mViewBackColor;
 
     public luckView(Context context) {
         this(context, null);
@@ -139,6 +144,7 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
         mBorderColor = array.getColor(R.styleable.luckView_lv_bordercolor, Color.RED);
         mLuckDataColor = array.getColor(R.styleable.luckView_lv_luckDataColor, Color.RED);
         mRotationSpeed = array.getInt(R.styleable.luckView_lv_rotationSpeed, 50);
+        mViewBackColor = array.getColor(R.styleable.luckView_lv_viewbackcolor, Color.WHITE);
         array.recycle();
     }
 
@@ -229,7 +235,7 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
     private void drawLuckViews(Canvas canvas) {
         float start = startAngle;
         float sweep = 360 / mLuckDatas.size();
-        canvas.drawColor(Color.WHITE);
+        canvas.drawColor(mViewBackColor);
         mPaint.setColor(mBorderColor);
         canvas.drawCircle(getWidth() / 2, getHeight() / 2, mRanius, mPaint);
         for (int i = 0; i < mLuckDatas.size(); i++) {
@@ -265,6 +271,17 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
             canvas.drawTextOnPath(luckData.getName(), mPath, 0, v, mPaint);
 
             //绘制图片
+            Bitmap bitmap = luckData.getBitmap();
+            if (bitmap != null) {
+                int imgWidth = (int) (mRanius / 4);
+                float angle = (float) ((start + 360 / mLuckDatas.size() / 2) * Math.PI / 180);
+                int imgx = (int) (getWidth() / 2 + mRanius / 2 * Math.cos(angle));
+                int imgy = (int) (getWidth() / 2 + mRanius / 2 * Math.sin(angle));
+                RectF rectF = new RectF(imgx - imgWidth / 2, imgy - imgWidth / 2, imgx + imgWidth / 2, imgy + imgWidth / 2);
+                canvas.drawBitmap(bitmap, null, rectF, null);
+            }
+
+
             start += sweep;
         }
 
@@ -383,6 +400,11 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
     @Override
     public void setLuckisUnSize(boolean isUnSize) {
         mLuckisUnSize = isUnSize;
+    }
+
+    @Override
+    public void setViewBackColor(int color) {
+        mViewBackColor = color;
     }
 
 
