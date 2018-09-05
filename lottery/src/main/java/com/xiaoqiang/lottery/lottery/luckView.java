@@ -101,6 +101,10 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
      * 旋转停止的监听器
      */
     private ICallback mICallback;
+    /**
+     * 按下 开始转动
+     */
+    private boolean isTouchStart;
 
     public luckView(Context context) {
         this(context, null);
@@ -331,7 +335,10 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
     }
 
     private void stop() {
-        luckStop(mLuckData);
+        if (isTouchStart) {
+            isTouchStart = false;
+            luckStop(mLuckData);
+        }
     }
 
     /**
@@ -340,6 +347,8 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
      * @param data
      */
     private void luckStop(LuckData data) {
+
+
         if (mICallback != null) {
             mICallback.luckEnd(data);
         }
@@ -455,6 +464,7 @@ public class luckView extends SurfaceView implements SurfaceHolder.Callback, Run
      * @param mSpeed
      */
     private void luckStart(double mSpeed) {
+        isTouchStart = true;
         if (mICallback != null) {
             mICallback.luckStart(mSpeed);
         }
