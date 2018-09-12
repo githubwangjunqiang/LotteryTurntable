@@ -1,5 +1,6 @@
-package com.xiaoqiang.lottery.lottery;
+package com.xiaoqiang.lottery.lottery.loading;
 
+import android.animation.ArgbEvaluator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,14 +13,12 @@ import android.view.View;
  */
 public class LoadingView extends View {
     private static final int SIZE = 100;
-    private float mSpeed = 0;
     private Paint mPaint;
-    private int mColor;
+    private int[] mColorRGB = new int[]{255, 255, 255};
     private int listSize = 8;
     private int mWidth, mHeight;
     private float mRadius;
     private int mIndex = 0;
-    private int mIndexTow = listSize / 2;
 
     public LoadingView(Context context) {
         this(context, null);
@@ -28,6 +27,7 @@ public class LoadingView extends View {
     public LoadingView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
+
 
     public LoadingView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -40,9 +40,17 @@ public class LoadingView extends View {
     private void init() {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-        mColor = Color.parseColor("#FFFFFF");
         mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setColor(mColor);
+    }
+
+    public int[] getColorRGB() {
+        return mColorRGB;
+    }
+
+    public void setColorRGB(int r, int g, int b) {
+        mColorRGB[0] = r;
+        mColorRGB[1] = g;
+        mColorRGB[2] = b;
     }
 
     public int getListSize() {
@@ -53,17 +61,6 @@ public class LoadingView extends View {
         this.listSize = listSize;
     }
 
-    public int getIndexTow() {
-        return mIndexTow;
-    }
-
-    public void setIndexTow(int indexTow) {
-        if (indexTow > listSize - 1) {
-            indexTow = indexTow % listSize;
-        }
-        mIndexTow = indexTow;
-        postInvalidate();
-    }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -84,17 +81,13 @@ public class LoadingView extends View {
 
         canvas.save();
         int deg = 360 / listSize;
+        canvas.rotate(mIndex * deg, mWidth / 2, mHeight / 2);
         for (int i = 0; i < listSize; i++) {
-            if (mIndex == i || mIndexTow == i) {
-                mPaint.setColor(Color.parseColor("#FFFFFF"));
-                canvas.drawCircle(mWidth / 2, mRadius * 2, mRadius * 1.5F, mPaint);
-            } else {
-                mPaint.setColor(Color.parseColor("#99FFFFFF"));
-                canvas.drawCircle(mWidth / 2, mRadius * 2, mRadius, mPaint);
-            }
-
+            mPaint.setARGB(Math.min(255, (i + 1) * (255 / listSize)), mColorRGB[0], mColorRGB[1], mColorRGB[2]);
+            canvas.drawCircle(mWidth / 2, mRadius * 2, mRadius * (1.2F * (i + 1) / listSize) + mRadius * 0.3F, mPaint);
             canvas.rotate(deg, mWidth / 2, mHeight / 2);
         }
+
         canvas.restore();
 
     }
